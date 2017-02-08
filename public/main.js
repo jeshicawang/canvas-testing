@@ -15,7 +15,9 @@ const height = 500 - margin.top - margin.bottom;
 
 const x = d3.scaleBand()
   .domain(data.map(d => d.name))
-  .rangeRound([0, width]);
+  .rangeRound([0, width])
+  .paddingInner(0.1)
+  .paddingOuter(0.1);
 
 const y = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
