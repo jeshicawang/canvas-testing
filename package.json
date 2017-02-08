@@ -1,0 +1,35 @@
+{
+  "name": "d3-experiments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm start && node .",
+    "watch": "npm run bundle:watch & nodemon .",
+    "bundle": "browserify public/main.js -o public/bundle.js",
+    "bundle:watch": "watchify public/main.js -o public/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeshicawang/canvas-testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeshicawang/canvas-testing/issues"
+  },
+  "homepage": "https://github.com/jeshicawang/canvas-testing#readme",
+  "dependencies": {
+    "acorn": "^4.0.9",
+    "acorn-jsx": "^3.0.1",
+    "d3": "^4.5.0",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "browserify": "^14.0.0",
+    "nodemon": "^1.11.0",
+    "watchify": "^3.9.0"
+  }
+}

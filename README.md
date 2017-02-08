@@ -1,2 +1,2 @@
 # D3-Experiments
-Experimenting with D3.
+Exploring the D3 library.
