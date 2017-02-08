@@ -1,14 +1,11 @@
-.bar {
-  fill: steelblue;
+text {
+  font: bold 48px monospace;
 }
 
-.axis text {
-  font: 10px sans-serif;
+.enter {
+  fill: green;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+.update {
+  fill: #333;
 }
