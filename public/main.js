@@ -9,28 +9,32 @@ const data = [
   {name: "Kwon",     value: 42}
 ];
 
-const width = 420;
-const barHeight = 20;
+const width = 960;
+const height = 500;
 
-const scale = d3.scaleLinear()
+
+const scaleY = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.value)])
-  .range([0, 420]);
+  .range([height, 0]);
 
-var chart = d3.select('.chart')
+const chart = d3.select('.chart')
   .attr('width', width)
-  .attr('height', barHeight * data.length);
+  .attr('height', height);
 
-var bar = chart.selectAll('g')
+const barWidth = width / data.length;
+
+const bar = chart.selectAll('g')
     .data(data)
   .enter().append('g')
-    .attr('transform', (d, i) => 'translate(0,' + i * barHeight + ')');
+    .attr('transform', (d, i) => 'translate(' + i * barWidth + ',0)');
 
 bar.append('rect')
-  .attr('width', d => scale(d.value))
-  .attr('height', barHeight - 1);
+  .attr('width', barWidth - 1)
+  .attr('height', d => height - scaleY(d.value))
+  .attr('y', d => scaleY(d.value))
 
 bar.append('text')
-  .attr('x', d => scale(d.value) - 3)
-  .attr('y', barHeight / 2)
-  .attr('dy', '.35em')
+  .attr('x', barWidth / 2)
+  .attr('y', d => scaleY(d.value) + 3)
+  .attr('dy', '.75em')
   .text(d => d.value)
