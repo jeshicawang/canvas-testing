@@ -30,35 +30,35 @@ const svg = d3.select('#tree')
     .attr('height', height)
 
 const g = svg.append('g')
-    .attr('transform', 'translate(80,80)')
+    .attr('transform', 'translate(160,0)')
 
 const tree = d3.tree()
-  .size([width - 160, height - 160]);
+  .size([height, width - 320]);
 
 const link = g.selectAll('.link')
   .data(tree(root).descendants().slice(1))
   .enter().append('path')
     .attr('class', 'link')
     .attr('d', d => {
-      return "M" + d.x + "," + d.y
-        + "C" + d.x + "," + (d.y + d.parent.y) / 2
-        + " " + d.parent.x + "," + (d.y + d.parent.y) / 2
-        + " " + d.parent.x + "," + d.parent.y;
+      return "M" + d.y + "," + d.x
+        + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+        + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+        + " " + d.parent.y + "," + d.parent.x;
       });
 
 const node = g.selectAll('.node')
   .data(root.descendants())
   .enter().append('g')
     .attr('class', d => 'node' + (d.children ? ' node--internal' : ' node--leaf'))
-    .attr('transform', d => 'translate(' + d.x + ',' + d.y + ')')
+    .attr('transform', d => 'translate(' + d.y + ',' + d.x + ')')
 
 node.append('circle')
   .attr('r', 2.5);
 
 node.append('text')
   .attr('dy', 3)
-  .attr('y', d => d.children ? -10 : 10)
-  .style('text-anchor', 'middle')
+  .attr('x', d => d.children ? -8 : 8)
+  .style('text-anchor', d => d.children ? 'end' : 'start')
   .text(d => {
     console.log(d);
     return d.data.name;
