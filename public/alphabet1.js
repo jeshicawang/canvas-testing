@@ -20,33 +20,17 @@ d3.interval(() => {
 }, 3000)
 
 function update(data)  {
-  const t = d3.transition()
-    .duration(1000);
-
   const text = g.selectAll('text')
-    .data(data, d => d);
+    .data(data);
 
-  text.exit()
-      .attr('class', 'exit')
-    .transition(t)
-      .attr('y', 60)
-      .style('fill-opacity', 1e-6)
-      .remove();
-
-  text.attr('class', 'update')
-      .attr('y', 0)
-      .style('fill-opacity', 1)
-    .transition(t)
-      .attr('x', (d, i) => i * 32)
+  text.attr('class', 'update');
 
   text.enter().append('text')
       .attr('class', 'enter')
-      .attr('dy', '.35em')
-      .attr('y', -60)
       .attr('x', (d, i) => i * 32)
-      .style('fill-opacity', 1e-6)
-      .text(d => d)
-    .transition(t)
-      .attr('y', 0)
-      .style('fill-opacity', 1);
+      .attr('dy', '.35em')
+    .merge(text)
+      .text(d => d);
+
+  text.exit().remove();
 }
