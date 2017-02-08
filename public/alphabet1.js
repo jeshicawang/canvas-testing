@@ -21,16 +21,16 @@ d3.interval(() => {
 
 function update(data)  {
   const text = g.selectAll('text')
-    .data(data, d => d);
+    .data(data);
 
   text.attr('class', 'update');
 
   text.enter().append('text')
       .attr('class', 'enter')
+      .attr('x', (d, i) => i * 32)
       .attr('dy', '.35em')
-      .text(d => d)
     .merge(text)
-      .attr('x', (d, i) => i * 32);
+      .text(d => d);
 
   text.exit().remove();
 }
